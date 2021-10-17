@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import za.co.jengo.demo.appuser.AppUserService;
 
 @Configuration
@@ -25,8 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/*")
-                .permitAll()
+                    .antMatchers("/api/v*/registration/**")
+                    .permitAll()
                 .anyRequest()
                 .authenticated().and()
                 .formLogin();
