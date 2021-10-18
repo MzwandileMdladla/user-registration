@@ -6,6 +6,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import za.co.jengo.demo.registration.token.ConfirmationToken;
+import za.co.jengo.demo.registration.token.ConfirmationTokenService;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +20,7 @@ public class AppUserService implements UserDetailsService {
 
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -30,11 +36,22 @@ public class AppUserService implements UserDetailsService {
             throw new IllegalStateException("Email already in use");
         }
 
-        //TODO: send confirmation token
-
         appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
         appUserRepository.save(appUser);
 
-        return "It works";
+        String token = UUID.randomUUID().toString();
+        //TODO: send confirmation token
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                appUser
+        );
+
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        //TODO: Send email
+
+        return token;
     }
 }
