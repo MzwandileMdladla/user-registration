@@ -40,7 +40,6 @@ public class AppUserService implements UserDetailsService {
         appUserRepository.save(appUser);
 
         String token = UUID.randomUUID().toString();
-        //TODO: send confirmation token
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
                 LocalDateTime.now(),
@@ -49,9 +48,6 @@ public class AppUserService implements UserDetailsService {
         );
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-
-        //TODO: Send email
-
         return token;
     }
 
