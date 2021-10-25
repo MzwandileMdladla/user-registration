@@ -16,3 +16,9 @@ Complete user login and registration backend with Spring security and email veri
 ### Postman
 
 ![image](https://user-images.githubusercontent.com/62093484/138751696-323e23de-7dd3-42ad-b31d-96612c805398.png)
+
+
+## Email Verification link
+
+![image](https://user-images.githubusercontent.com/62093484/138761752-5e94575f-7a51-4775-8961-3730764c487c.png)
+
