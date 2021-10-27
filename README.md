@@ -22,3 +22,15 @@ Complete user login and registration backend with Spring security and email veri
 
 ![image](https://user-images.githubusercontent.com/62093484/138761752-5e94575f-7a51-4775-8961-3730764c487c.png)
 
+# MailDev Install & Run
+
+```
+$ npm install -g maildev
+$ maildev
+```
+
+If you want to use MailDev with [Docker](https://www.docker.com/), you can use the [maildev/maildev image](https://hub.docker.com/r/maildev/maildev) on Docker Hub. For a guide for usage with Docker, [checkout the docs](https://github.com/maildev/maildev/blob/master/docs/docker.md).
+
+```
+$ docker run -p 1080:1080 -p 1025:1025 maildev/maildev
+```
